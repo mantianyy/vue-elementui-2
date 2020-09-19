@@ -33,16 +33,17 @@ export default {
   data() {
     return {
       asideMenu: [
-        { path: '/', label: '首页', icon: 's-home' },
-        { path: '/video', label: '视频管理', icon: 'video-play' },
-        { path: '/user', label: '用户管理', icon: 'user' },
+        { name: 'home', path: '/', label: '首页', icon: 's-home' },
+        { name: 'video', path: '/video', label: '视频管理', icon: 'video-play' },
+        { name: 'user', path: '/user', label: '用户管理', icon: 'user' },
         {
           path: '/other',
           label: '其他',
+          name: 'other',
           icon: 'location-outline',
           children: [
-            { path: '/other/other1', label: '其他1', icon: 'dot-square' },
-            { path: '/other/other2', label: '其他2', icon: 'line-square' }
+            { name: 'other1', path: '/other/other1', label: '其他1', icon: 'dot-square' },
+            { name: 'other2', path: '/other/other2', label: '其他2', icon: 'line-square' }
           ]
         }
       ]
@@ -50,6 +51,7 @@ export default {
   },
   methods: {
     clickMenu: function(item) {
+      this.$router.push({ name: item.name, path: item.path })
       this.$store.commit('selectMenu', item)
     }
   }
