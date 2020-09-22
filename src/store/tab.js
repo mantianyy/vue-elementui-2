@@ -2,7 +2,8 @@ export default {
   state: {
     menu: [],
     currentMenu: null,
-    tabList: [{ name: 'home', path: '/', label: '首页', icon: 's-home' }]
+    tabList: [{ name: 'home', path: '/', label: '首页', icon: 's-home' }],
+    isCollapse: false
   },
   mutations: {
     selectMenu: function(state, val) {
@@ -19,6 +20,9 @@ export default {
     closeTab: function(state, val) {
       let result = state.tabList.findIndex(item => item.name === val.name)
       state.tabList.splice(result, 1)
+    },
+    collapseMenu: function(state) {
+      state.isCollapse = !state.isCollapse
     }
   },
   actions: {}

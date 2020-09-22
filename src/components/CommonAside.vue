@@ -1,5 +1,5 @@
 <template>
-  <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+  <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :collapse="isCollapse">
     <el-menu-item :index="item.path" v-for="item in noChildrenMenu" :key="item.path" @click="clickMenu(item)">
       <i :class="'el-icon-' + item.icon"></i>
       <span slot="title">{{ item.label }}</span>
@@ -28,6 +28,9 @@ export default {
     },
     hasChildrenMenu() {
       return this.asideMenu.filter(item => item.children)
+    },
+    isCollapse() {
+      return this.$store.state.tab.isCollapse
     }
   },
   data() {
@@ -62,5 +65,11 @@ export default {
 .el-menu {
   height: 100%;
   border: 0px;
+}
+
+/*优化折叠面板的折叠过度效果*/
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
 </style>

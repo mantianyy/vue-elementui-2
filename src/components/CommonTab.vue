@@ -7,6 +7,7 @@
       :disable-transitions="false"
       @close="handleClose(tag)"
       @click="changeSelect(tag)"
+      :effect="$route.name === tag.name ? 'dark' : 'plain'"
     >
       {{ tag.label }}
     </el-tag>
@@ -44,6 +45,10 @@ export default {
 <style stylus="scss" scoped>
 .tags {
   padding: 10px;
+}
+
+.el-tag {
+  cursor: pointer;
 }
 
 .el-tag {
