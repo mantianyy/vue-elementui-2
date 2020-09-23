@@ -1,0 +1,38 @@
+.home{
+  .avatar {
+    height: 236px;
+    margin-bottom: 10px;
+    .el-card {
+
+    }
+  }
+  .info{
+    height: 542px;
+  }
+  .num{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-items: center;
+    .el-card{
+      width:32%;
+      margin-bottom:20px;
+    }
+  }
+  .polyline{
+    margin-top:20px;
+    .el-card{
+      height: 280px;
+    }
+  }
+  .pie{
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    margin-top:20px;
+    .el-card{
+      width: 48%;
+      height: 280px;
+    }
+  }
+}
