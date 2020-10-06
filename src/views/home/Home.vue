@@ -15,12 +15,16 @@
         </div>
       </el-card>
       <el-card shadow="hover" class="info">
-        鼠标悬浮时显示
+        <el-table :data="tableData" style="width: 100%" max-height="600">
+          <el-table-column prop="date" label="日期" width="80"> </el-table-column>
+          <el-table-column prop="name" label="姓名" width="80"> </el-table-column>
+          <el-table-column prop="address" label="地址"> </el-table-column>
+        </el-table>
       </el-card>
     </el-col>
     <el-col :span="16">
       <div class="num">
-        <el-card shadow="hover" v-for="item in iconList" :key="item.icon" class="card-num">
+        <el-card shadow="hover" v-for="item in iconList" :key="item.name" class="card-num">
           <i :class="`el-icon-${item.icon} icon`" :style="{ background: item.background, color: item.color }"></i>
           <div class="card-info">
             <p class="money">{{ item.money }}</p>
@@ -29,13 +33,13 @@
         </el-card>
       </div>
       <div class="polyline">
-        <el-card shadow="hover">
-          鼠标悬浮时显示
+        <el-card shadow="hover" style="padding:0;">
+          <chart :options="orgOptions"></chart>
         </el-card>
       </div>
       <div class="pie">
         <el-card shadow="hover">
-          鼠标悬浮时显示
+          <ve-line :data="chartData"></ve-line>
         </el-card>
         <el-card shadow="hover">
           鼠标悬浮时显示
@@ -46,19 +50,97 @@
 </template>
 
 <script>
+import VeLine from 'v-charts/lib/line.common'
 export default {
   name: 'Home',
+  components: {
+    've-line': VeLine
+  },
   data() {
     return {
       avatar: require('@/assets/img/user.jpg'),
       iconList: [
         { name: 'icon-1', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: '#33aef0' },
-        { name: 'icon-1', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: 'pink' },
-        { name: 'icon-1', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: '#33aef0' },
-        { name: 'icon-1', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: 'pink' },
-        { name: 'icon-1', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: '#33aef0' },
-        { name: 'icon-1', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: 'pink' }
-      ]
+        { name: 'icon-2', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: 'pink' },
+        { name: 'icon-3', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: '#33aef0' },
+        { name: 'icon-4', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: 'pink' },
+        { name: 'icon-5', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: '#33aef0' },
+        { name: 'icon-6', icon: 'circle-check', money: '$1234', desc: '今日支付订单', color: 'white', background: 'pink' }
+      ],
+      tableData: [
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        },
+        {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        },
+        {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        },
+        {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        },
+        {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        },
+        {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        },
+        {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }
+      ],
+      orgOptions: {},
+      chartData: {
+        columns: ['日期', '销售额'],
+        rows: [
+          { 日期: '1月1日', 销售额: 123 },
+          { 日期: '1月2日', 销售额: 1223 },
+          { 日期: '1月3日', 销售额: 2123 },
+          { 日期: '1月4日', 销售额: 4123 },
+          { 日期: '1月5日', 销售额: 3123 },
+          { 日期: '1月6日', 销售额: 7123 }
+        ]
+      }
     }
   },
   mounted() {
@@ -70,10 +152,35 @@ export default {
         console.log(error)
       }
     )
+    this.orgOptions = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          type: 'line',
+          smooth: true
+        }
+      ]
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/home.scss';
+.echarts {
+  width: 500px;
+  height: 250px;
+  margin: 0 auto;
+}
+
+/deep/ .ve-line {
+  height: 300px;
+}
 </style>
