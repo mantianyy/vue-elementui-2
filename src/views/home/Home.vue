@@ -42,7 +42,7 @@
           <ve-line :data="chartData"></ve-line>
         </el-card>
         <el-card shadow="hover">
-          鼠标悬浮时显示
+          <e-chart :chartData="echartData.order"></e-chart>
         </el-card>
       </div>
     </el-col>
@@ -51,10 +51,12 @@
 
 <script>
 import VeLine from 'v-charts/lib/line.common'
+import Echart from '../../components/Echart'
 export default {
   name: 'Home',
   components: {
-    've-line': VeLine
+    've-line': VeLine,
+    'e-chart': Echart
   },
   data() {
     return {
@@ -140,13 +142,38 @@ export default {
           { 日期: '1月5日', 销售额: 3123 },
           { 日期: '1月6日', 销售额: 7123 }
         ]
+      },
+      echartData: {
+        order: {
+          xData: [],
+          series: []
+        },
+        user: {
+          xData: [],
+          series: []
+        },
+        video: {
+          series: []
+        }
       }
     }
   },
   mounted() {
     this.$http('/home/getHomeData').then(
       res => {
+        res = res.data
         console.log(res.data)
+        //折线图
+        let order = res.data.orderData
+        this.echartData.order.xData = order.date
+        let keyArray = Object.keys(order.data[0])
+        keyArray.forEach(key => {
+          this.echartData.order.series.push({
+            name: key == 'wechat' ? '小程序' : key,
+            data: order.data.map(item => item[key]),
+            type: 'line'
+          })
+        })
       },
       error => {
         console.log(error)
