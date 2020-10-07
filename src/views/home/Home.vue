@@ -34,15 +34,15 @@
       </div>
       <div class="polyline">
         <el-card shadow="hover" style="padding:0;">
-          <chart :options="orgOptions"></chart>
+          <e-chart :chartData="echartData.order" style="height: 280px"></e-chart>
         </el-card>
       </div>
       <div class="pie">
         <el-card shadow="hover">
-          <ve-line :data="chartData"></ve-line>
+          <e-chart :chartData="echartData.user" style="height:300px;"> </e-chart>
         </el-card>
-        <el-card shadow="hover">
-          <e-chart :chartData="echartData.order"></e-chart>
+        <el-card shadow="hover" style="padding:0;">
+          <e-chart :chartData="echartData.video" :isAxisChart="false" style="height:300px;"> </e-chart>
         </el-card>
       </div>
     </el-col>
@@ -55,7 +55,6 @@ import Echart from '../../components/Echart'
 export default {
   name: 'Home',
   components: {
-    've-line': VeLine,
     'e-chart': Echart
   },
   data() {
@@ -162,7 +161,6 @@ export default {
     this.$http('/home/getHomeData').then(
       res => {
         res = res.data
-        console.log(res.data)
         //折线图
         let order = res.data.orderData
         this.echartData.order.xData = order.date
@@ -173,6 +171,28 @@ export default {
             data: order.data.map(item => item[key]),
             type: 'line'
           })
+        })
+
+        //柱状图
+        let user = res.data.userData
+        this.echartData.user.xData = user.map(item => item.date)
+        this.echartData.user.series.push({
+          name: '新增用户',
+          data: user.map(item => item.new),
+          type: 'bar'
+        })
+
+        this.echartData.user.series.push({
+          name: '活跃用户',
+          data: user.map(item => item.active),
+          type: 'bar'
+        })
+
+        //饼图
+        let video = res.data.videoData
+        this.echartData.video.series.push({
+          type: 'pie',
+          data: video
         })
       },
       error => {

@@ -7,11 +7,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import http from './api/config'
 import './mock'
-import ECharts from 'vue-echarts'
-import 'echarts/lib/chart/line'
 
 Vue.use(ElementUI)
-Vue.component('chart', ECharts)
 Vue.config.productionTip = false
 Vue.prototype.$http = http
 

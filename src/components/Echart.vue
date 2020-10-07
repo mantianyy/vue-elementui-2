@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%" refs="echart">
+  <div style="height: 100%" ref="echart">
     echart
   </div>
 </template>
@@ -7,17 +7,19 @@
 <script>
 import echarts from 'echarts'
 export default {
-  name: 'Echart',
   data() {
     return {
       echart: null,
       axisOption: {
-        xAxis: [
-          {
-            type: 'category',
-            data: []
-          }
-        ],
+        grid: {
+          left: '3%',
+          right: '4%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          data: []
+        },
         yAxis: [
           {
             type: 'value'
@@ -52,10 +54,10 @@ export default {
   },
   watch: {
     chartData: {
-      deep: true,
       handler: function() {
         this.initChart()
-      }
+      },
+      deep: true
     }
   },
   methods: {
@@ -64,7 +66,6 @@ export default {
       if (this.echart) {
         this.echart.setOption(this.options)
       } else {
-        console.log('test')
         this.echart = echarts.init(this.$refs.echart)
         this.echart.setOption(this.options)
       }
@@ -73,13 +74,12 @@ export default {
       if (this.isAxisChart) {
         this.axisOption.xAxis.data = this.chartData.xData
         this.axisOption.series = this.chartData.series
-        console.log('axis')
       } else {
-        console.log('normal')
+        this.normalOption.series = this.chartData.series
       }
     }
   }
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

@@ -77,6 +77,9 @@
     margin-top:20px;
     .el-card{
       height: 280px;
+      /deep/ .el-card__body{
+        padding:0;
+      }
     }
   }
   .pie{
