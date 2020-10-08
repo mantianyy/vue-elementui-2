@@ -9,39 +9,9 @@ export default {
     return {
       echart: null,
       axisOption: {
-        grid: {
-          left: '3%',
-          right: '4%',
-          containLabel: true
-        },
-        color: [
-          '#2ec7c9',
-          '#b6a2de',
-          '#5ab1ef',
-          '#ffb980',
-          '#d87a80',
-          '#8d98b3',
-          '#e5cf0d',
-          '#97b552',
-          '#95706d',
-          '#dc69aa',
-          '#07a2a4',
-          '#9a7fd1',
-          '#588dd5',
-          '#f5994e',
-          '#c05050',
-          '#59678c',
-          '#c9ab00',
-          '#7eb00a',
-          '#6f5553',
-          '#c14089'
-        ],
-        legend: {
-          textStyle: {
-            color: '#333'
-          },
-          top: '10'
-        },
+        grid: {},
+        color: [],
+        legend: {},
         xAxis: {
           type: 'category',
           axisLine: {
@@ -70,37 +40,8 @@ export default {
         series: []
       },
       normalOption: {
-        color: [
-          '#2ec7c9',
-          '#b6a2de',
-          '#5ab1ef',
-          '#ffb980',
-          '#d87a80',
-          '#8d98b3',
-          '#e5cf0d',
-          '#97b552',
-          '#95706d',
-          '#dc69aa',
-          '#07a2a4',
-          '#9a7fd1',
-          '#588dd5',
-          '#f5994e',
-          '#c05050',
-          '#59678c',
-          '#c9ab00',
-          '#7eb00a',
-          '#6f5553',
-          '#c14089'
-        ],
-        legend: {
-          textStyle: {
-            color: '#333'
-          },
-          type: 'scroll',
-          orient: 'vertical',
-          left: 0,
-          top: 0
-        },
+        color: [],
+        legend: {},
         series: []
       }
     }
@@ -111,7 +52,10 @@ export default {
       default() {
         return {
           xData: [],
-          series: []
+          series: [],
+          grid: {},
+          legend: {},
+          color: []
         }
       }
     },
@@ -151,10 +95,15 @@ export default {
     },
     initChartData() {
       if (this.isAxisChart) {
+        this.axisOption.color = this.chartData.color
         this.axisOption.xAxis.data = this.chartData.xData
         this.axisOption.series = this.chartData.series
+        this.axisOption.grid = this.chartData.grid
+        this.axisOption.legend = this.chartData.legend
       } else {
+        this.normalOption.color = this.chartData.color
         this.normalOption.series = this.chartData.series
+        this.normalOption.legend = this.chartData.legend
       }
     },
     resizeChart() {
