@@ -61,10 +61,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .el-menu {
   height: 100%;
   border: 0px;
+  h3 {
+    text-align: center;
+    color: #ffffff;
+    line-height: 48px;
+  }
 }
 
 /*优化折叠面板的折叠过度效果*/

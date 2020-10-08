@@ -1,7 +1,5 @@
 <template>
-  <div style="height: 100%" ref="echart">
-    echart
-  </div>
+  <div style="height: 100%" ref="echart"></div>
 </template>
 
 <script>
@@ -16,18 +14,93 @@ export default {
           right: '4%',
           containLabel: true
         },
+        color: [
+          '#2ec7c9',
+          '#b6a2de',
+          '#5ab1ef',
+          '#ffb980',
+          '#d87a80',
+          '#8d98b3',
+          '#e5cf0d',
+          '#97b552',
+          '#95706d',
+          '#dc69aa',
+          '#07a2a4',
+          '#9a7fd1',
+          '#588dd5',
+          '#f5994e',
+          '#c05050',
+          '#59678c',
+          '#c9ab00',
+          '#7eb00a',
+          '#6f5553',
+          '#c14089'
+        ],
+        legend: {
+          textStyle: {
+            color: '#333'
+          },
+          top: '10'
+        },
         xAxis: {
           type: 'category',
+          axisLine: {
+            lineStyle: {
+              color: '#2ec7c9'
+            }
+          },
+          axisLabel: {
+            color: '#588dd5'
+          },
           data: []
         },
         yAxis: [
           {
-            type: 'value'
+            type: 'value',
+            axisLine: {
+              lineStyle: {
+                color: '#2ec7c9'
+              }
+            },
+            axisLabel: {
+              color: '#59678c'
+            }
           }
         ],
         series: []
       },
       normalOption: {
+        color: [
+          '#2ec7c9',
+          '#b6a2de',
+          '#5ab1ef',
+          '#ffb980',
+          '#d87a80',
+          '#8d98b3',
+          '#e5cf0d',
+          '#97b552',
+          '#95706d',
+          '#dc69aa',
+          '#07a2a4',
+          '#9a7fd1',
+          '#588dd5',
+          '#f5994e',
+          '#c05050',
+          '#59678c',
+          '#c9ab00',
+          '#7eb00a',
+          '#6f5553',
+          '#c14089'
+        ],
+        legend: {
+          textStyle: {
+            color: '#333'
+          },
+          type: 'scroll',
+          orient: 'vertical',
+          left: 0,
+          top: 0
+        },
         series: []
       }
     }
@@ -50,6 +123,9 @@ export default {
   computed: {
     options() {
       return this.isAxisChart ? this.axisOption : this.normalOption
+    },
+    isCollapse() {
+      return this.$store.state.tab.isCollapse
     }
   },
   watch: {
@@ -58,6 +134,9 @@ export default {
         this.initChart()
       },
       deep: true
+    },
+    isCollapse() {
+      setTimeout(this.resizeChart, 300)
     }
   },
   methods: {
@@ -77,7 +156,16 @@ export default {
       } else {
         this.normalOption.series = this.chartData.series
       }
+    },
+    resizeChart() {
+      this.echart ? this.echart.resize() : ''
     }
+  },
+  mounted() {
+    window.addEventListener('resize', this.resizeChart)
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.resizeChart)
   }
 }
 </script>

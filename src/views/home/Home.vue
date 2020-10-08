@@ -192,7 +192,9 @@ export default {
         let video = res.data.videoData
         this.echartData.video.series.push({
           type: 'pie',
-          data: video
+          data: video,
+          radius: '43%',
+          center: ['58%', '50%']
         })
       },
       error => {
