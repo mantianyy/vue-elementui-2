@@ -1,6 +1,6 @@
 {
   "iconList": [
-  { "name": "icon-1", "icon": "circle-check", "money": "$1234", "desc": "今日支付订单", "color": "white", "background": "33aef0" },
+  { "name": "icon-1", "icon": "circle-check", "money": "$1234", "desc": "今日支付订单", "color": "white", "background": "#33aef0" },
   { "name": "icon-2", "icon": "circle-check", "money": "$1234", "desc": "今日支付订单", "color": "white", "background": "pink" },
   { "name": "icon-3", "icon": "circle-check", "money": "$1234", "desc": "今日支付订单", "color": "white", "background": "#33aef0" },
   { "name": "icon-4", "icon": "circle-check", "money": "$1234", "desc": "今日支付订单", "color": "white", "background": "pink" },
